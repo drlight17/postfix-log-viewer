@@ -1,5 +1,6 @@
 # postfix-log-viewer
 web gui for viewing parsed postfix logs
+
 In order to delete 3 months older data create in maillog2db database cleanup schedule:
 ~~~sql
 CREATE DEFINER=`postfix`@`%` EVENT `cleanup`
