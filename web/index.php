@@ -11,9 +11,9 @@
 <div style="width: 100%; text-align: center; margin-top: 10px;">
 <td class="navbartop" valign="middle" align="center">
 	<strong>
-	    <a href="https://mail.kgilc.ru/rc" title="Почта">Почта</a>&nbsp;|
+	    <a href="https://mail.arcticdigital.ru/rc" title="Почта">Почта</a>&nbsp;|
 
-<a href="https://mail.kgilc.ru/index2.php" title="Управление почтой">Администрирование почты</a>&nbsp;|
+<a href="https://mail.arcticdigital.ru/index2.php" title="Управление почтой">Администрирование почты</a>&nbsp;|
 <a href="https://www.kgilc.ru" title="Сайт АО КГИЛЦ">Сайт АО КГИЛЦ</a>&nbsp;
 
 <!--<a href="news.php" title="Новости">Новости</a>&nbsp;
@@ -31,23 +31,25 @@
 
 <div style="width: 100%; text-align: center; margin-top: 10px;"><span style="font-size: 20pt; color: black;">Просмотр логов доставки почтовой системы АО "КГИЛЦ"</span></div><br>
 
-
 <!-- samoilov 09.04.2018 add sticky header script -->
 <script src="jquery-1.12.4.min.js"></script>
 <script src="jquery.stickytableheaders.min.js"></script>
 <script>
  jQuery(document).ready(function($) {
      var $table = $('.pme-main');
-//    var $filter = $('.pme-filter');
-//    var $nav_buttons = $('table.pme-navigation');
+    var $nav_buttons = $('table.pme-navigation');
   $table.stickyTableHeaders({
-//    fixedOffset: $nav_buttons,
-//	fixedOffset: $filter,
-//    scrollableArea: $nav_buttons
+        cacheHeaderHeight: true,
+        fixedOffset: $nav_buttons,
+        //scrollableArea: $nav_buttons
     });
+        /*$nav_buttons.stickyTableHeaders({
+        fixedOffset: 100,
+        //scrollableArea: $nav_buttons
+    });*/
 });
-
 </script>
+
 <?php
 /*
  * IMPORTANT NOTE: This generated file contains only a subset of huge amount
@@ -61,7 +63,7 @@
 ini_set('display_errors','Off');
 ini_set('error_reporting', E_ALL );
 // MySQL host name, user name, password, database, and table
-$opts['hn'] = 'db.host.loc';
+$opts['hn'] = 'db.host';
 $opts['un'] = 'dbuser';
 $opts['pw'] = 'dbpasswd';
 $opts['db'] = 'postfix_logs';
@@ -91,7 +93,7 @@ $opts['options'] = 'FL';
 
 // Navigation style: B - buttons (default), T - text links, G - graphic links
 // Buttons position: U - up, D - down (default)
-$opts['navigation'] = 'GU';
+$opts['navigation'] = 'TD';
 /* Display special page elements*/
 $opts['display'] = array(
         'form'  => true,
@@ -241,6 +243,6 @@ new phpMyEdit($opts);
 
 //}
 ?>
-<div class="footer"><span style="font-weight: normal;">&copy; 2016 - <?php echo date('Y');?> | <a href="https://kgilc.ru">АО КГИЛЦ</a> | ver.0.9.7 </span></div>
+<div class="footer"><span style="font-weight: normal;">&copy; 2016 - <?php echo date('Y');?> | <a href="https://kgilc.ru">АО КГИЛЦ</a> | ver.0.9.9 </span></div>
 </body>
 </html>

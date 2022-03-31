@@ -28,7 +28,7 @@ text-decoration: none;
 background-color: #FFFF00;
 }
 table{
-table-layout: fixed;
+/*table-layout: fixed;*/
 width: 100%;
 border: 1px solid #48B2DA;
 margin: 0%;
@@ -41,7 +41,7 @@ background-color: #F0FFFF;
 }
 td{
 /*background: #f0ffffb5;*/
-width: 30px;
+max-width: 130px;
 overflow: hidden;
 text-overflow: ellipsis;
 background: #f0ffffe0;
@@ -72,7 +72,7 @@ div.footer{
     text-align: center;
     bottom: 0px;
     border: 1px solid #48B2DA;
-    box-shadow: 0px -4px 8px rgba(0,0,0,0.2);
+    /*box-shadow: 0px -4px 8px rgba(0,0,0,0.2);*/
 }
 /*.pme-header {
     box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
@@ -83,9 +83,19 @@ margin-left: -40px;
 bottom:40px;
 padding:5px;
 }
-/*table.pme-navigation{
-display: none;
-}*/
+table.pme-navigation {
+    position: fixed;
+    bottom: 36px;
+    background: azure;
+    width: 100%;
+}
+
+.pme-navigation {
+    box-shadow: 0px -4px 8px rgb(0 0 0 / 20%);
+}
+.tableFloatingHeaderOriginal {
+    box-shadow: 0px 4px 8px rgb(0 0 0 / 30%);
+}
 .pme-add,.pme-view, .pme-change, .pme-copy, .pme-delete  {
 	display:none;
 }

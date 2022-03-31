@@ -2152,6 +2152,8 @@ if(!isset($ret)){$ret='';} //initialized $ret
 		echo $this->htmlHiddenSys('qfn', $this->qfn);
 		echo $this->htmlHiddenSys('fm', $this->fm);
 		echo '<table class="',$this->getCSSclass('main'),'" summary="',$this->tb,'">',"\n";
+		// samoilov 31.03.2022 to fix sticky table header
+		echo '<thead>';
 		echo '<tr class="',$this->getCSSclass('header'),'">',"\n";
 		/*
 		 * System (navigation, selection) columns counting
@@ -2357,7 +2359,8 @@ if(!isset($ret)){$ret='';} //initialized $ret
 				echo '</tr>',"\n";
 			}
 		}
-
+		// samoilov 31.03.2022 to fix sticky table header
+		echo '</thead>';
 		/*
 		 * Display sorting sequence
 		 */
