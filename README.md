@@ -1,6 +1,8 @@
 # postfix-log-viewer
 web gui for viewing parsed postfix logs
 
+Place files from web folder wherever you want on web server.
+
 Data collects by [this](https://github.com/drlight17/maillog2db) maillog2db script.
 
 In order to use maillog2db in web gui create mysql view with such query:
