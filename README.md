@@ -1,7 +1,7 @@
 # postfix-log-viewer
 web gui for viewing parsed postfix logs
 
-Place files from web folder wherever you want on web server.
+Place files from web folder wherever you want on web server. GUI is based on [phpMyEdit class](https://www.phpmyedit.org/) fixed and adopted for the viewer (php 8.0 and older is supported).
 
 Data collects by [this](https://github.com/drlight17/maillog2db) maillog2db script.
 
