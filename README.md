@@ -1,6 +1,13 @@
 # postfix-log-viewer
 web gui for viewing parsed postfix logs
 
+Data collects by [this](https://github.com/drlight17/maillog2db) maillog2db script.
+
+In order to use maillog2db in web gui create mysql view with such query:
+~~~sql
+select `pfmaillog2db_deliveries`.`id` AS `id`,`pfmaillog2db_deliveries`.`delivery_timestamp` AS `delivery_timestamp`,`pfmaillog2db_deliveries`.`delivery_queueid` AS `queueid`,concat_ws('',`pfmaillog2db_messages`.`message_from`,`pfmaillog2db_deliveries`.`delivery_from`) AS `from`,`pfmaillog2db_deliveries`.`delivery_to` AS `to`,`pfmaillog2db_messages`.`message_subject` AS `subject`,`pfmaillog2db_messages`.`message_size` AS `size`,`pfmaillog2db_deliveries`.`delivery_status` AS `status`,`pfmaillog2db_deliveries`.`delivery_statusext` AS `status_advanced` from (`pfmaillog2db_deliveries` left join `pfmaillog2db_messages` on(`pfmaillog2db_deliveries`.`delivery_queueid` = `pfmaillog2db_messages`.`message_queueid`))
+~~~
+
 In order to delete 3 months older data create in maillog2db database cleanup schedule:
 ~~~sql
 CREATE DEFINER=`postfix`@`%` EVENT `cleanup`
@@ -15,4 +22,4 @@ DELETE `pfmaillog2db_messages` from `pfmaillog2db_messages` INNER join `pfmaillo
 DELETE from pfmaillog2db_messages WHERE `message_timestamp` <= NOW() - INTERVAL 3 MONTH;
 DELETE from pfmaillog2db_deliveries WHERE `delivery_timestamp` <= NOW() - INTERVAL 3 MONTH;
 END
-
+~~~
