@@ -1,0 +1,8 @@
+dont forget there must be mysqli extension installed in php-fpm-mailcow container installed
+
+you can install it via CLI inside the container:
+# docker-php-ext-install mysqli 
+# docker-php-ext-enable mysqli
+
+then restart container:
+docker-compose restart php-fpm-mailcow
