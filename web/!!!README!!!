@@ -6,3 +6,12 @@ you can install it via CLI inside the container:
 
 then restart container:
 docker-compose restart php-fpm-mailcow
+
+To make changes permanent use docker-compose.override.yml file and add the following:
+
+version: '2.1'
+services:
+
+    php-fpm-mailcow:
+     command: >
+      sh -c "docker-php-ext-install mysqli && docker-php-ext-enable mysqli && php-fpm -d date.timezone=${TZ} -d expose_php=0"
