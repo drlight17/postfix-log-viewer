@@ -96,6 +96,7 @@ todayButton: true,
 closeOnDateSelect:false,
 ownerDocument: document,
 allowBlank: true,
+maxDate: '0',
 closeOnWithoutClick :true,
 defaultTime: '',
 validateOnBlur: false
