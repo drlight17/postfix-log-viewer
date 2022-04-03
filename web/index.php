@@ -2,6 +2,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf8">
         <title>Postfix logs viewer</title>
         <link rel="stylesheet" href="style.css">
+		<!-- samoilov 03.04.2022 add datetimepicker -->
+		<link rel="stylesheet" type="text/css" href="js/datetimepicker/jquery.datetimepicker.min.css"/>
 		<link rel="icon" type="image/png" href="images/watermark.png" />
 </head>
 
@@ -30,10 +32,10 @@
 </div>
 
 <div style="width: 100%; text-align: center; margin-top: 10px;"><span style="font-size: 20pt; color: black;">Просмотр логов доставки почтовой системы АО "КГИЛЦ"</span></div><br>
-
+<!-- samoilov 03.04.2022 add jquery -->
+<script src="js/jquery-1.12.4.min.js"></script>
 <!-- samoilov 09.04.2018 add sticky header script -->
-<script src="jquery-1.12.4.min.js"></script>
-<script src="jquery.stickytableheaders.min.js"></script>
+<script src="js/jquery.stickytableheaders.min.js"></script>
 <script>
  jQuery(document).ready(function($) {
      var $table = $('.pme-main');
@@ -49,6 +51,58 @@
     });*/
 });
 </script>
+<!-- samoilov 03.04.2022 add date time convert -->
+<script>
+jQuery(document).ready(function($) {
+$('body > form > table.pme-main > tbody > tr[class^="pme-row"]> td:nth-child(3)').each(function() {
+	//console.log(formatDate($(this).html()));
+	//$(this).html() = formatDate($(this).html());
+	$(this).html(formatDate($(this).html()));
+});
+
+function formatDate(date) {
+     var d = new Date(date),
+         month = '' + (d.getMonth() + 1),
+         day = '' + d.getDate(),
+         year = d.getFullYear(),
+		 time = d.toLocaleTimeString('ru-RU');
+
+     if (month.length < 2) month = '0' + month;
+     if (day.length < 2) day = '0' + day;
+
+     var to_return = [day, month, year].join('.');
+	 return to_return += ' ' + time;
+
+ }
+ //console.log(formatDate('2022-03-28 18:21:58'));
+ });
+</script>
+<!-- samoilov 03.04.2022 add datetimepicker -->
+<script src="js/datetimepicker/jquery.datetimepicker.full.js"></script>
+<script>
+ jQuery(document).ready(function($) {
+	 	 var $input_to_pick = $('input[name^="PME_sys_qf1"]');// change if date column number is changed
+	 $input_to_pick.datetimepicker({
+lang: 'ru',
+
+format: 'Y-m-d H:i',
+formatDate:'Y-m-d',
+formatTime:'H:i',
+dayOfWeekStart:1,
+step:5,
+mask: true,
+timepicker: true,
+todayButton: true,
+closeOnDateSelect:false,
+ownerDocument: document,
+allowBlank: true,
+closeOnWithoutClick :true,
+defaultTime: '',
+validateOnBlur: false
+});
+$.datetimepicker.setLocale('ru');
+ });
+</script>
 
 <?php
 /*
@@ -63,9 +117,9 @@
 ini_set('display_errors','Off');
 ini_set('error_reporting', E_ALL );
 // MySQL host name, user name, password, database, and table
-$opts['hn'] = 'db.host';
-$opts['un'] = 'dbuser';
-$opts['pw'] = 'dbpasswd';
+$opts['hn'] = 'localhost';
+$opts['un'] = 'postfix';
+$opts['pw'] = '12345';
 $opts['db'] = 'postfix_logs';
 $opts['tb'] = 'pfmaillog2db_view';
 
@@ -176,6 +230,13 @@ $opts['fdd']['queueid'] = array(
   'default'  => '',
   'sort'     => true
 );
+$opts['fdd']['delivery_timestamp'] = array(
+  'name'     => 'Дата и время доставки',
+  'select'   => 'T',
+  'maxlen'   => 255,
+  'default'  => '',
+  'sort'     => true
+);
 $opts['fdd']['from'] = array(
   'name'     => 'От',
   'select'   => 'T',
@@ -192,22 +253,6 @@ $opts['fdd']['to'] = array(
   'sort'     => true
 );
 $opts['fdd']['to']['URLprefix'] = 'mailto:';
-$opts['fdd']['subject'] = array(
-  'name'     => 'Тема',
-  'select'   => 'T',
-  'maxlen'   => 255,
-  'default'  => '',
-  'sort'     => false
-);
-$opts['fdd']['size'] = array(
-  'name'     => 'Размер (байт)',
-  'select'   => 'T',
-  'maxlen'   => 255,
-  'default'  => '',
-  'sort'     => true
-//  'URLdisp'  => $value.'@arcticsu'
-);
-
 //$opts['fdd']['login']['URLdisp'] = '$value';
 //$opts['fdd']['login']['URLprefix'] = 'mailto:';
 //$opts['fdd']['login']['URLpostfix'] = '@arcticsu.ru';
@@ -227,14 +272,22 @@ $opts['fdd']['status_advanced'] = array(
   'default'  => '',
   'sort'     => false
 );
-//$opts['fdd']['status_advanced']['width'] = '500px';
-$opts['fdd']['delivery_timestamp'] = array(
-  'name'     => 'Дата и время доставки',
+$opts['fdd']['subject'] = array(
+  'name'     => 'Тема',
+  'select'   => 'T',
+  'maxlen'   => 255,
+  'default'  => '',
+  'sort'     => false
+);
+$opts['fdd']['size'] = array(
+  'name'     => 'Размер (байт)',
   'select'   => 'T',
   'maxlen'   => 255,
   'default'  => '',
   'sort'     => true
+//  'URLdisp'  => $value.'@arcticsu'
 );
+//$opts['fdd']['status_advanced']['width'] = '500px';
 
 
 // Now important call to phpMyEdit
