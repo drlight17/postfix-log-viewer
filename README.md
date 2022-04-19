@@ -23,5 +23,6 @@ DELETE from pfmaillog2db_logs WHERE `log_timestamp` <= NOW() - INTERVAL 3 MONTH;
 DELETE `pfmaillog2db_messages` from `pfmaillog2db_messages` INNER join `pfmaillog2db_deliveries` on `pfmaillog2db_messages`.`message_queueid`=`pfmaillog2db_deliveries`.`delivery_queueid` where `pfmaillog2db_messages`.`message_timestamp` = '0000-00-00 00:00:00' AND `pfmaillog2db_deliveries`.`delivery_timestamp` <= NOW() - INTERVAL 3 MONTH;
 DELETE from pfmaillog2db_messages WHERE `message_timestamp` <= NOW() - INTERVAL 3 MONTH;
 DELETE from pfmaillog2db_deliveries WHERE `delivery_timestamp` <= NOW() - INTERVAL 3 MONTH;
+DELETE from pfmaillog2db_clients WHERE `row_created_at` <= NOW() - INTERVAL 3 MONTH;
 END
 ~~~
