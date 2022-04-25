@@ -5,10 +5,14 @@ Place files from web folder wherever you want on web server. GUI is based on [ph
 
 Data collects by [this](https://github.com/drlight17/maillog2db) maillog2db script.
 
-In order to use maillog2db in web gui create mysql view with such query:
+ ~~In order to use maillog2db in web gui create mysql view with such query:~~
+<details> 
+  <summary>OUTDATED code</summary>
 ~~~sql
 select `pfmaillog2db_deliveries`.`id` AS `id`,`pfmaillog2db_deliveries`.`delivery_timestamp` AS `delivery_timestamp`,`pfmaillog2db_deliveries`.`delivery_queueid` AS `queueid`,concat_ws('',`pfmaillog2db_messages`.`message_from`,`pfmaillog2db_deliveries`.`delivery_from`) AS `from`,`pfmaillog2db_deliveries`.`delivery_to` AS `to`,`pfmaillog2db_messages`.`message_subject` AS `subject`,`pfmaillog2db_messages`.`message_size` AS `size`,`pfmaillog2db_deliveries`.`delivery_status` AS `status`,`pfmaillog2db_deliveries`.`delivery_statusext` AS `status_advanced` from (`pfmaillog2db_deliveries` left join `pfmaillog2db_messages` on(`pfmaillog2db_deliveries`.`delivery_queueid` = `pfmaillog2db_messages`.`message_queueid`))
 ~~~
+</details>
+
 
 In order to delete 3 months older data create in maillog2db database cleanup schedule:
 ~~~sql
