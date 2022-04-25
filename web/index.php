@@ -122,7 +122,7 @@ $opts['hn'] = 'localhost';
 $opts['un'] = 'postfix';
 $opts['pw'] = '12345';
 $opts['db'] = 'postfix_logs';
-$opts['tb'] = 'pfmaillog2db_view';
+$opts['tb'] = 'pfmaillog2db_deliveries';
 
 // Name of field which is the unique key
 $opts['key'] = 'id';
